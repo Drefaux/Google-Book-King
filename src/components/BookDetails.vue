@@ -3,14 +3,14 @@
     <div class="card text-white bg-dark border-dark">
       <img
         class="card-img-top"
-        :src="volumeInfo.imageLinks.thumbnail"
+        :src="[book.volumeInfo.imageLinks === undefined ? {} : `${book.volumeInfo.imageLinks.thumbnail}`]"
         alt="Card image cap"
       />
       <div class="card-body">
-        <h2 class="card-title">{{ volumeInfo.title }}</h2>
-        <span class="card-subtitle">{{ volumeInfo.subtitle }}</span>
+        <h2 class="card-title">{{ book.volumeInfo.title }}</h2>
+        <span class="card-subtitle">{{ book.volumeInfo.subtitle }}</span>
         <div class="card-text">
-          {{ volumeInfo.description }}
+          {{ book.description }}
         </div>
       </div>
       <button
@@ -18,59 +18,90 @@
         type="button"
         class="btn btn-danger position-absolute"
         data-bs-toggle="modal"
-        :data-bs-target="'#exampleModal-' + bookChosen.id"
+        data-bs-target="#exampleModal"
       >
         Preview
       </button>
     </div>
 
-  <modal-comp
-  :bookChosen="bookChosen"
-   />
-   
+    <div class="container">
+      <!-- Modal -->
+     <div
+        class="modal fade"
+        id="exampleModal"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <img
+                class="card-img-top"
+                :src="[bookChosen === undefined ? {} : `${bookChosen.imageLinks.thumbnail}`]"
+                
+                alt="Card image cap"
+              />
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div v-if="bookChosen" class="modal-body">
+              {{ bookChosen.description }}
+            </div>
+            <div class="modal-footer">
+              <a
+                
+                :href="[bookChosen === undefined ? {} : bookChosen.previewLink]"
+                type="button"
+                class="btn btn-primary"
+                >Details</a
+              >
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
   </div>
 </template>
 
 <script>
-import ModalComp from './ModalComp.vue';
+
 export default {
-  components: { ModalComp },
   name: "book-details",
   data() {
     return {
-      bookChosen: 
-        {
-          id: null,
-          thumbnail: null,
-          description: null,
-          previewLink: null
-        }
-      
-    }
+      // bookSeleted: {
+      //   volumeInfo: {}
+      // }
+    };
   },
   props: {
     book: { type: Object, default: null },
   },
   computed: {
-    volumeInfo() {
-      // console.log(this.book.volumeInfo)
-      return this.book.volumeInfo;
+    bookChosen() {
+      return this.$store.state.bookChosen.book.volumeInfo
+    }
+  },
+  methods: {
+    getBook(book) {
+      this.$store.dispatch('bookChosen/bookChosen', book)
+      bookChosen() 
     },
     
   },
-  methods: {
-    getBook(bookdata) {
-      console.log(bookdata)
-      this.bookChosen.description = bookdata.volumeInfo.description
-      this.bookChosen.thumbnail = bookdata.volumeInfo.imageLinks.thumbnail
-      this.bookChosen.previewLink = bookdata.volumeInfo.previewLink
-      this.bookChosen.id = bookdata.id
-      console.log(this.bookChosen)
-      console.log(this.bookChosen.description)
-      console.log(this.bookChosen.previewLink)
-    },
-      
-  },
+  
 };
 </script>
 

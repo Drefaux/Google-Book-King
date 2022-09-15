@@ -14,32 +14,21 @@
 <script>
 import BookDetails from "../components/BookDetails.vue";
 
-import axios from "axios";
 
 export default {
   components: { BookDetails },
   name: "book-view",
-  data() {
-    return {
-      books: [],
-    };
-  },
   beforeCreate: function() {
     document.body.className = "book";
   },
-  created() {
-    axios
-      .get(
-        'https://www.googleapis.com/books/v1/volumes?q=inauthor:"Stephen+King"&key=AIzaSyBELf7aWJmgECK8XccZA6i8CnIT_rOxWVo'+'&maxResults=40'
-      )
-      .then((response) => {
-        console.log(response.data.items)
-        this.books = response.data.items;
-      })
-      .catch((e) => {
-        this.errors.push(e);
-      });
+  computed: {
+    books() {
+      return this.$store.state.books.items
+    }
   },
+  mounted() {
+    this.$store.dispatch('getBooks')
+  }
   
 };
 </script>
