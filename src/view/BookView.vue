@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <div class="row">
             <book-details
             v-for="book in books" :key="book.id" :book="book"
             class="col-4 box"
             />
+            
         </div>
         
     </div>
@@ -13,6 +13,7 @@
 
 <script>
 import BookDetails from "../components/BookDetails.vue";
+
 import axios from "axios";
 
 export default {
@@ -39,6 +40,7 @@ export default {
         this.errors.push(e);
       });
   },
+  
 };
 </script>
 

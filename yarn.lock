@@ -769,6 +769,11 @@
   dependencies:
     "@vue/cli-shared-utils" "^5.0.8"
 
+"@vue/cli-plugin-vuex@~5.0.0":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-vuex/-/cli-plugin-vuex-5.0.8.tgz#0d4cb3020f9102bea9288d750729dde176c66ccd"
+  integrity sha512-HSYWPqrunRE5ZZs8kVwiY6oWcn95qf/OQabwLfprhdpFWAGtLStShjsGED2aDpSSeGAskQETrtR/5h7VqgIlBA==
+
 "@vue/cli-service@^3.0.0-rc.10":
   version "3.0.0-rc.10"
   resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-3.0.0-rc.10.tgz#c1bf783f35dcc897cfdd5bc85268f98528ddea51"
@@ -7212,6 +7217,11 @@ vue-template-es2015-compiler@^1.6.0:
 vue@^2.5.16:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
+
+vuex@^3.6.2:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
+  integrity sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==
 
 watchpack@^1.5.0:
   version "1.6.0"
